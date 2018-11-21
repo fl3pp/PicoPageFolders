@@ -5,6 +5,15 @@ use PicoPageFolders\Managers\LanguageManager;
 
 class LanguageManagerTest extends TestCase {
 
+    public function test_getLanguage_LanguageSetBefore_ReturnsLanguage() {
+        $testee = new LanguageManager();
+
+        $testee->setLanguage('de');
+        $result = $testee->getLanguage();
+        
+        $this->assertSame('de', $result);
+    }
+
     public function test_getLanguageFromFullId_WithFullId_ReturnsLast2Chars() {
         $testee = new LanguageManager();
 

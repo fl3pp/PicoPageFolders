@@ -10,6 +10,10 @@ class LanguageManager {
         $this->currentLang = $language;
     }
 
+    public function getLanguage() {
+        return $this->currentLang;
+    }
+
     public function addAvailableLanguage($lanugage) {
         if (in_array($lanugage, $this->availableLanguages)) return;
         array_push($this->availableLanguages, $lanugage);

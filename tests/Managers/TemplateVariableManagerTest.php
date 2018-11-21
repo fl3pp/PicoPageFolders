@@ -60,4 +60,16 @@ class TemplateVariableManagerTest extends TestCase {
         $this->assertSame('localhost/test?lang=en', $variables['other_languages']['en']);
     }
 
+    public function test_setLanguage_LanguageSetInLangManager_SetsVariable() {
+        $langManager = $this->createMock(\PicoPageFolders\Managers\LanguageManager::class);
+        $langManager->method('getLanguage')
+                    ->willReturn('de');
+        $variables = array();
+        $testee = new TemplateVariableManager($langManager);
+
+        $testee->setLanguage($variables);
+
+        $this->assertSame('de', $variables['language']);
+    }
+
 }

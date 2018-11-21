@@ -26,7 +26,7 @@ class Plugin {
     }
 
     public function skipLoading($id) {
-        return $this->langManager->getLanguageFromFullId($id) != $this->getLang();
+        return $this->langManager->getLanguageFromFullId($id) != $this->langManager->getLanguage();
     }
 
     public function hidePages(&$pages) {
@@ -42,12 +42,13 @@ class Plugin {
         $templateVariableManager->updateCurrentPage($variables);
         $templateVariableManager->updatePrevAndNextPages($variables);
         $templateVariableManager->updatePages($variables);
+        $templateVariableManager->setLanguage($variables);
         $templateVariableManager->addOtherLanguages($variables);
     }
 
     public function load404(&$content) {
         $specialPageManager = new \PicoPageFolders\Managers\SpecialPageManager($this->config, $this->fileSystem);
-        $specialPageManager->load404($content, $this->getLang());
+        $specialPageManager->load404($content, $this->langManager->getLanguage());
     }
 
     private function getLang() {
