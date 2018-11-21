@@ -57,7 +57,7 @@ class IntegrationTest extends TestCase {
         $testee->processUrl($url);
         $result = $testee->skipLoading('test/de');
         
-        $this->assertTrue($result);
+        $this->assertFalse($result);
     }    
     
     public function test_hidePages_WithIndexand404andNormalPage_HidesSpecialPages() {

@@ -26,7 +26,7 @@ class Plugin {
     }
 
     public function skipLoading($id) {
-        return $this->langManager->getLanguageFromFullId($id) != $this->language;
+        return $this->langManager->getLanguageFromFullId($id) != $this->getLang();
     }
 
     public function hidePages(&$pages) {
