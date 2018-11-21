@@ -2,13 +2,19 @@
 
 PicoPageFolders is a plugin for Pico which enabled MultiLanguage and organization for Pico.
 
+This plugin features a 100% CodeCoverage (wrappers excluded), separated in Unit and Integration Tests. 
+
+Pull Requests are welcome!
+
 ### Features
 - Organize multiple languages in a folder
 - URL rewriting
 - Additional twig variables
 - Skip loading of not needed pages
-- 100% CodeCoverage (without wrappers)
 - Adjusted Index and 404 pages
+
+### Installation
+Install via composer: `composer require jflepp/picopagefolders`
 
 ### Creating multi language pages
 
