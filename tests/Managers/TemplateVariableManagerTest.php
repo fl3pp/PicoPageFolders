@@ -72,4 +72,25 @@ class TemplateVariableManagerTest extends TestCase {
         $this->assertSame('de', $variables['language']);
     }
 
+    public function test_setIndex_Null_NotSetsVariable() {
+        $variables = array();
+        $testee = new TemplateVariableManager($langManager);
+
+        $testee->setIndex($variables, null);
+
+        $this->assertFalse(isset($variables['index_page']));
+    }
+
+    public function test_setIndex_IndexPage_SetsVariable() {
+        $langManager = $this->createMock(\PicoPageFolders\Managers\LanguageManager::class);
+        $langManager->method('getLanguageAwarePage')
+                    ->willReturn(array('id' => 'index', 'url'=> 'localhost/?lang=de'));
+        $variables = array();
+        $testee = new TemplateVariableManager($langManager);
+
+        $testee->setIndex($variables, array('id' => 'iamoold', 'url' => 'localhost/index/de'));
+
+        $this->assertSame('localhost/?lang=de', $variables['index_page']['url']);
+    }
+
 }

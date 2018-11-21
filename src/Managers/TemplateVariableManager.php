@@ -22,6 +22,11 @@ class TemplateVariableManager {
         $variables['language'] = $this->langManager->getLanguage();
     }
 
+    public function setIndex(&$variables, $page) {
+        if ($page == null) return;
+        $variables['index_page'] = $this->langManager->getLanguageAwarePage($page);
+    }
+
     public function updatePages(&$variables) {
         $pages = &$variables['pages'];
         foreach ($pages as $id => $page) {

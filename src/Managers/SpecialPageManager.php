@@ -11,8 +11,12 @@ class SpecialPageManager {
         $this->fileSystem = $fileSystem;
     }
 
-    public function isSpecialPage($id) {
-        return substr($id, 0, 5) == 'index' || substr($id, 0, 3) == '404';
+    public function isIndex($id) {
+        return substr($id, 0, 5) == 'index';
+    }
+    
+    public function is404($id) {
+        return substr($id, 0, 3) == '404';
     }
 
     public function load404(&$content, $language) {

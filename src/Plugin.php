@@ -29,11 +29,16 @@ class Plugin {
         return $this->langManager->getLanguageFromFullId($id) != $this->langManager->getLanguage();
     }
 
+    private $indexPage;
     public function hidePages(&$pages) {
         $specialPageManager = new \PicoPageFolders\Managers\SpecialPageManager($this->config, $this->fileSystem);
         foreach ($pages as $id => $page) {
-            if (!$specialPageManager->isSpecialPage($id)) continue;
-            unset($pages[$id]); 
+            if ($specialPageManager->isIndex($id)) {
+                $this->index = $page;
+                unset($pages[$id]); 
+            } else if ($specialPageManager->is404($id)) {
+                unset($pages[$id]); 
+            }
         }
     }
 
@@ -43,6 +48,7 @@ class Plugin {
         $templateVariableManager->updatePrevAndNextPages($variables);
         $templateVariableManager->updatePages($variables);
         $templateVariableManager->setLanguage($variables);
+        $templateVariableManager->setIndex($variables, $this->indexPage);
         $templateVariableManager->addOtherLanguages($variables);
     }
 

@@ -5,26 +5,34 @@ use PicoPageFolders\Managers\SpecialPageManager;
 
 class SpecialPageManagerTest extends TestCase {
 
-    public function test_isSpecialPage_Index_ReturnsTrue() {
+    public function test_isIndex_Index_ReturnsTrue() {
         $testee = new SpecialPageManager(array(), $this);
 
-        $result = $testee->isSpecialPage('index/de');
+        $result = $testee->isIndex('index/de');
 
         $this->assertTrue($result);
     }
 
-    public function test_isSpecialPage_404_ReturnsTrue() {
+    public function test_isIndex_NonSpecialPage_ReturnsFalse() {
         $testee = new SpecialPageManager(array(), $this);
 
-        $result = $testee->isSpecialPage('404/de');
+        $result = $testee->isIndex('test/de');
+
+        $this->assertFalse($result);
+    }
+
+    public function test_is404_404_ReturnsTrue() {
+        $testee = new SpecialPageManager(array(), $this);
+
+        $result = $testee->is404('404/de');
 
         $this->assertTrue($result);
     }
 
-    public function test_isSpecialPage_NonSpecialPage_ReturnsFalse() {
+    public function test_is404_NonSpecialPage_ReturnsFalse() {
         $testee = new SpecialPageManager(array(), $this);
 
-        $result = $testee->isSpecialPage('test/de');
+        $result = $testee->is404('test/de');
 
         $this->assertFalse($result);
     }
