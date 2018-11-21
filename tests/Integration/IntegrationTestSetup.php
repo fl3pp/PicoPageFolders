@@ -3,7 +3,7 @@
 namespace PicoPageFolders\Test\Integration;
 
 class IntegrationTestSetup {
-    public $Config;
+    public $Config = array();
     
     public function createTestee() {
         return new \PicoPageFolders\Plugin(
@@ -13,9 +13,12 @@ class IntegrationTestSetup {
         );
     }
     
-    
     /* FileSystem */
     public $Files = array();
+    public function exists($path) {
+        return isset($this->Files[$path]);
+    }
+    
     public function readFile($path) {
         return $this->Files[$path];
     }
