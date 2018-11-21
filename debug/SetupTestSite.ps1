@@ -13,11 +13,11 @@ New-Item -ItemType Directory $appDirectory;
 cd $appDirectory;
 
 composer create-project picocms/pico-composer .
-composer require jflepp/picomailformsplugin
+composer require jflepp/picopagefolders
 
-Remove-Item -Recurse -Force $appDirectory\plugins\PicoMailFormsPlugin
-New-Item -ItemType Directory $appDirectory\plugins\PicoMailFormsPlugin;
-Copy-Item $pluginDirectory\* $appDirectory\plugins\PicoMailFormsPlugin -Recurse -Force
+Remove-Item -Recurse -Force $appDirectory\plugins\picopagefolders
+New-Item -ItemType Directory $appDirectory\plugins\picopagefolders;
+Copy-Item $pluginDirectory\* $appDirectory\plugins\picopagefolders -Recurse -Force
 
 Copy-Item $PSScriptRoot\TestData\* $appDirectory -Recurse -Force
 
