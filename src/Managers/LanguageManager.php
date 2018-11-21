@@ -28,7 +28,7 @@ class LanguageManager {
                 "&lang=$this->currentLang",
                 "&lang=$availableLanguage",
                 $otherPage['url']);
-            $otherLanguages[$availableLanguage] = $otherPage;
+            $otherLanguages[$availableLanguage] = $otherPage['url'];
         }
         return $otherLanguages;
     }

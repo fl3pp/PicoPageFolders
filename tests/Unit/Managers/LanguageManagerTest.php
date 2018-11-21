@@ -24,8 +24,8 @@ class LanguageManagerTest extends TestCase {
         $result = $testee->getAlternativeLanguagePages($page);
 
         $this->assertSame(2, count($result));
-        $this->assertSame('http://localhost/?test&lang=en', $result['en']['url']);
-        $this->assertSame('http://localhost/?test&lang=fr', $result['fr']['url']);
+        $this->assertSame('http://localhost/?test&lang=en', $result['en']);
+        $this->assertSame('http://localhost/?test&lang=fr', $result['fr']);
     }
     
     public function test_getLanguageAwarePage_WithDefaultPage_ReturnNewIdAndUrl() {
