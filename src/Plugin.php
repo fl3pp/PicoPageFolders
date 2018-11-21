@@ -46,7 +46,7 @@ class Plugin {
 
     private function load404(&$content) {
         $specialPageManager = new \PicoPageFolders\Managers\SpecialPageManager($this->config, $this->fileSystem);
-        $specialPageManager->load404($content);
+        $specialPageManager->load404($content, $this->getLang());
     }
 
     private function getLang() {

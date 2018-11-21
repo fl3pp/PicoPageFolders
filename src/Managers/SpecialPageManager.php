@@ -15,12 +15,12 @@ class SpecialPageManager {
         return substr($id, 0, 5) == 'index' || substr($id, 0, 3) == '404';
     }
 
-    private function load404(&$content) {
-        $contentDir = $this->configuration['content_dir'];
-        $contentExt = $this->configuration['content_ext'];
-        $errorFile = $contentDir.'/404/'.$this->language.$contentExt;
-        if (file_exists($errorFile)) {
-            $content = file_get_contents($errorFile);
+    public function load404(&$content, $language) {
+        $contentDir = $this->config['content_dir'];
+        $contentExt = $this->config['content_ext'];
+        $errorFile = $contentDir.'/404/'.$language.$contentExt;
+        if ($this->fileSystem->exists($errorFile)) {
+            $content = $this->fileSystem->readFile($errorFile);
         }
     }
         
