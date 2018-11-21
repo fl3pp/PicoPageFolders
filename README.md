@@ -1,6 +1,6 @@
 # PicoPageFolders
 
-PicoPageFolders is a plugin for Pico which enabled MultiLanguage and organization for Pico.
+PicoPageFolders is a plugin for Pico which provides MultiLanguage support. Pages are being separated into folders, the file names are being used as their language.
 
 This plugin features a 100% CodeCoverage (wrappers excluded), separated in Unit and Integration Tests. 
 
@@ -44,3 +44,14 @@ Pages:
 - `index_page` - current page
 - `language` - current language
 - `other_languages` - other languages available with links (key-value)
+
+
+### examples
+
+_Display other languages_
+~~~ twig
+{% for lang,page in other_languages %}
+    <li>{{ lang }} - <a href="{{ page }}">{{ page }}</a></li>
+{% endfor %}
+~~~
+
