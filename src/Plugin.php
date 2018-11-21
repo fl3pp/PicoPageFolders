@@ -40,6 +40,7 @@ class Plugin {
     public function setTemplateVariables(&$variables) {
         $templateVariableManager = new \PicoPageFolders\Managers\TemplateVariableManager($this->langManager);
         $templateVariableManager->updateCurrentPage($variables);
+        $templateVariableManager->updatePrevAndNextPages($variables);
         $templateVariableManager->updatePages($variables);
         $templateVariableManager->addOtherLanguages($variables);
     }

@@ -13,6 +13,11 @@ class TemplateVariableManager {
         $variables['current_page'] = $this->langManager->getLanguageAwarePage($variables['current_page']);
     }
 
+    public function updatePrevAndNextPages(&$variables) {
+        $variables['next_page'] = $this->langManager->getLanguageAwarePage($variables['next_page']);
+        $variables['prev_page'] = $this->langManager->getLanguageAwarePage($variables['prev_page']);
+    }
+
     public function updatePages(&$variables) {
         $pages = &$variables['pages'];
         foreach ($pages as $id => $page) {
