@@ -64,9 +64,9 @@ class IntegrationTest extends TestCase {
         $setup = new IntegrationTestSetup();
         $testee = $setup->createTestee();
         $pages = array(
-            'index/de' => array('id' => 'index/de', 'url' => 'localhost?'.rawurlencode('index/en') ),
-            '404/de' => array('id' => 'index/de', 'url' => 'localhost?'.rawurlencode('404/en') ),
-            'test/de' => array('id' => 'test/de', 'url' => 'localhost/?'.rawurlencode('test/de'))
+            'test/de' => array('id' => 'test/de', 'url' => 'localhost/?'.rawurlencode('test/de')),
+            'index/de' => array('id' => 'index/de', 'url' => 'localhost?'.rawurlencode('index/en')),
+            '404/de' => array('id' => 'index/de', 'url' => 'localhost?'.rawurlencode('404/en'))
         );
         $testee = $setup->createTestee();
 
@@ -89,6 +89,30 @@ class IntegrationTest extends TestCase {
         $testee->load404($content);
 
         $this->assertSame('testcontent', $content);
+    }
+
+    public function test_setTemplateVariables_WithIndex_SetsIndex() {
+        $setup = new IntegrationTestSetup();
+        $setup->GetVariables['lang'] = 'de';
+        $pages = array(
+            'test/de' => array('id' => 'test/de', 'url' => 'localhost/?'.rawurlencode('test/de')),
+            'index/de' => array('id' => 'index/de', 'url' => 'localhost/?'.rawurlencode('index/de')),
+            '404/de' => array('id' => 'index/de', 'url' => 'localhost/?'.rawurlencode('404/en'))
+        );
+        $variables = array(
+            'pages' => $pages,
+            'current_page' => array('id' => 'test/de', 'url' => 'localhost/?'.rawurlencode('test/de'))
+        );
+        $testee = $setup->createTestee();
+
+        $url = 'test/de';
+        $testee->processUrl($url);
+        $testee->hidePages($pages);
+        $testee->setTemplateVariables($variables);
+        
+        $result = $variables['index_page'];
+        $this->assertSame('index', $result['id']);
+        $this->assertSame('localhost/?index&lang=de', $result['url']);
     }
 
 }

@@ -34,7 +34,7 @@ class Plugin {
         $specialPageManager = new \PicoPageFolders\Managers\SpecialPageManager($this->config, $this->fileSystem);
         foreach ($pages as $id => $page) {
             if ($specialPageManager->isIndex($id)) {
-                $this->index = $page;
+                $this->indexPage = $page;
                 unset($pages[$id]); 
             } else if ($specialPageManager->is404($id)) {
                 unset($pages[$id]); 
