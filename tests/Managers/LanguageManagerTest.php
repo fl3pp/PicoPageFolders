@@ -52,7 +52,7 @@ class LanguageManagerTest extends TestCase {
         $this->assertSame('http://localhost/test?lang=fr', $result['fr']);
     }
     
-    public function test_getLanguageAwarePage_WithDefaultPage_ReturnNewIdAndUrl() {
+    public function test_getLanguageAwarePage_WithBase64Url_ReturnNewIdAndUrl() {
         $inputPage = array( 'id' => 'test/de', 'url' => 'localhost/?'.rawurlencode('test/de') );
         $testee = new LanguageManager();
 
@@ -62,7 +62,28 @@ class LanguageManagerTest extends TestCase {
         $this->assertSame('test', $result['id']);
         $this->assertSame('localhost/?test&lang=de', $result['url']);
     }
-    
+
+    public function test_getLanguageAwarePage_WithoutAmpersand_ReturnNewIdAndUrl() {
+        $inputPage = array( 'id' => 'test/de', 'url' => 'localhost/test/de' );
+        $testee = new LanguageManager();
+
+        $testee->setLanguage('de');
+        $result = $testee->getLanguageAwarePage($inputPage);
+
+        $this->assertSame('test', $result['id']);
+        $this->assertSame('localhost/test?lang=de', $result['url']);
+    }
+
+    public function test_getLanguageAwarePage_WithLanguageInDomain_NotReplacesDomain() {
+        $inputPage = array( 'id' => 'test/de', 'url' => 'http://dev.test.ch/test/de' );
+        $testee = new LanguageManager();
+
+        $testee->setLanguage('de');
+        $result = $testee->getLanguageAwarePage($inputPage);
+
+        $this->assertSame('test', $result['id']);
+        $this->assertSame('http://dev.test.ch/test?lang=de', $result['url']);
+    }
 
     public function test_getExtendedUrlFromUrl_WithDefaultUrl_ExtendsUrlWithLanguageFile() {
         $testee = new LanguageManager();

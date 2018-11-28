@@ -42,7 +42,10 @@ class LanguageManager {
         $langExtension = substr($id, -3);
         $newId = substr($id, 0, -strlen($langExtension));
         $page['id'] = $newId;
-        $page['url'] = str_replace(rawurlencode($langExtension), '', $page['url']).'&lang='.$this->currentLang;
+        $page['url'] = $this->replaceLastOccurence($langExtension, '', $page['url']);
+        $page['url'] = $this->replaceLastOccurence(rawurlencode($langExtension), '', $page['url']);
+        $page['url'] .= strpos($page['url'], '?') !== false ? '&' : '?';
+		$page['url'] .= 'lang='.$this->currentLang;
         return $page;
     }
 
@@ -51,5 +54,14 @@ class LanguageManager {
         if (substr($url, -1) != '/') $url .= '/';
         $url .= $this->currentLang;
         return $url;
+    }
+
+    private function replaceLastOccurence($search, $replacement, $subject) {
+        $regex = '/'.preg_quote(strrev($search), '/').'/';
+        $replacement = strrev($replacement);
+        $subject = strrev($subject);
+
+        $replaced = preg_replace($regex, $replacement, $subject, 1);
+        return strrev($replaced);
     }
 }
