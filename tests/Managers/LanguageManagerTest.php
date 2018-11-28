@@ -36,6 +36,21 @@ class LanguageManagerTest extends TestCase {
         $this->assertSame('http://localhost/?test&lang=en', $result['en']);
         $this->assertSame('http://localhost/?test&lang=fr', $result['fr']);
     }
+
+    public function test_getAlternativeLanguagePages_AlternativeLanguagesExistWithoutAmpersand_ReturnOtherPages() {
+        $page = array('id' => 'test', 'url' => 'http://localhost/test?lang=de' );
+        $testee = new LanguageManager();
+
+        $testee->setLanguage('de');
+        $testee->addAvailableLanguage('en');
+        $testee->addAvailableLanguage('fr');
+        $testee->addAvailableLanguage('de');
+        $result = $testee->getAlternativeLanguagePages($page);
+
+        $this->assertSame(2, count($result));
+        $this->assertSame('http://localhost/test?lang=en', $result['en']);
+        $this->assertSame('http://localhost/test?lang=fr', $result['fr']);
+    }
     
     public function test_getLanguageAwarePage_WithDefaultPage_ReturnNewIdAndUrl() {
         $inputPage = array( 'id' => 'test/de', 'url' => 'localhost/?'.rawurlencode('test/de') );

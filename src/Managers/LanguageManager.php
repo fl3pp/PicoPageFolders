@@ -29,8 +29,8 @@ class LanguageManager {
             if ($this->currentLang == $availableLanguage) continue;
             $otherPage = $page;
             $otherPage['url'] = str_replace(
-                "&lang=$this->currentLang",
-                "&lang=$availableLanguage",
+                "lang=$this->currentLang",
+                "lang=$availableLanguage",
                 $otherPage['url']);
             $otherLanguages[$availableLanguage] = $otherPage['url'];
         }
