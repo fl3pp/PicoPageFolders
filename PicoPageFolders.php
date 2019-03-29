@@ -1,4 +1,4 @@
-<?
+<?php
 
 class PicoPageFolders extends AbstractPicoPlugin {
     const API_VERSION = 2;
