@@ -1,5 +1,7 @@
 # PicoPageFolders
 
+[![Latest Stable Version](https://poser.pugx.org/jflepp/picopagefolders/v/stable)](https://packagist.org/packages/jflepp/picopagefolders) [![Total Downloads](https://poser.pugx.org/jflepp/picopagefolders/downloads)](https://packagist.org/packages/jflepp/picopagefolders)
+
 PicoPageFolders is a plugin for Pico which provides MultiLanguage support. Pages are being separated into folders, the file names are being used as their language.
 
 This plugin features a 100% CodeCoverage (wrappers excluded), separated in Unit and Integration Tests. 
